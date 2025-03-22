@@ -10,7 +10,7 @@ class AuthViewModel {
 
   final Ref _ref;
 
-  Future<void> singIn(String email, String password) async {
+  Future<void> signIn(String email, String password) async {
     try {
       final userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
@@ -26,7 +26,7 @@ class AuthViewModel {
           .createUserWithEmailAndPassword(email: email, password: password);
       _ref.read(authProvide.notifier).state = userCredential.user?.uid;
     } catch (e) {
-      print(e);
+      throw e;
     }
   }
 
